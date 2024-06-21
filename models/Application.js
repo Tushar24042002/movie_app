@@ -1,7 +1,7 @@
-const { DataTypes, Model } = require('sequelize');
-const sequelize = require('../config');
-const Job = require('./Job');
-const JobSeekerProfile = require('./JobSeekerProfile');
+import { DataTypes, Model }  from 'sequelize';
+import sequelize  from '../config';
+import Job  from './Job';
+import JobSeekerProfile  from './JobSeekerProfile';
 
 class Application extends Model {}
 

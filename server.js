@@ -1,10 +1,9 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const sequelize = require('./config');
-const userRoutes = require("./routes/userRoutes");
-const jobRoutes = require("./routes/JobRoutes");
-const employerRoutes = require("./routes/employerRoutes");
-const jobSeekerRoutes = require("./routes/JobSeekerRoutes");
+import express from 'express';
+import bodyParser from 'body-parser';
+import sequelize from './config.js';
+// import jobRoutes from "./controllers/JobRoutes.js";
+import userController from "./controllers/user.controller.js";
+// import jobSeekerRoutes from "./controllers/JobSeekerRoutes.js";
 
 const app = express();
 const port = 3000;
@@ -13,10 +12,10 @@ app.use(bodyParser.json());
 
 
 
-app.use("/users", userRoutes);
-app.use("/jobs", jobRoutes);
-app.use("/employers", employerRoutes);
-app.use("/candidates", jobSeekerRoutes);
+app.use("/users", userController);
+// app.use("/jobs", jobRoutes);
+// app.use("/employers", employerRoutes);
+// app.use("/candidates", jobSeekerRoutes);
 
 sequelize.sync().then(() => {
     app.listen(port, () => {
