@@ -1,16 +1,11 @@
-const express = require('express');
+import express from "express";
+import { addEmpProfile, getAllEmployers, getEmployerById } from "../services/employer.service.js";
 const router = express.Router();
-const User = require('../models/EmployerProfile');
+
 
 // Route to create a new user
-router.post('/create', async (req, res) => {
-  const { name, email, password, role } = req.body;
-  try {
-    const newUser = await User.create({ name, email, password, role });
-    res.status(201).json(newUser);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
+router.post('/create', addEmpProfile);
+router.get("/", getAllEmployers);
+router.get("/:id", getEmployerById);
 
-module.exports = router;
+export default router;
