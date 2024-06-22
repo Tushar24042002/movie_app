@@ -5,6 +5,7 @@ import sequelize from './config.js';
 import { errorHandler } from './Exceptions/VaidationMiddleware.js';
 import userController from "./controllers/user.controller.js";
 import employerController from "./controllers/employer.controller.js"
+import JobContoller from "./controllers/job.controller.js";
 // import jobSeekerRoutes from "./controllers/JobSeekerRoutes.js";
 
 const app = express();
@@ -16,6 +17,7 @@ app.use(bodyParser.json());
 
 app.use("/users", userController);
 app.use("/employer",employerController);
+app.use("/job",JobContoller);
 
 app.use(errorHandler);
 // app.use("/jobs", jobRoutes);

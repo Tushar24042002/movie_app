@@ -1,6 +1,6 @@
 import { DataTypes, Model } from 'sequelize';
-import sequelize from '../config';
-import EmployerProfile from './EmployerProfile';
+import sequelize from '../config.js';
+import EmployerProfile from './EmployerProfile.js';
 
 class Job extends Model {}
 
@@ -41,4 +41,4 @@ Job.init({
   modelName: 'Job',
 });
 
-module.exports = Job;
+export default Job;

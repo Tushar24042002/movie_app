@@ -1,16 +1,11 @@
-const express = require('express');
+import express from "express";
+import { addJob, getAllJobs, getJobById } from "../services/job.service.js";
 const router = express.Router();
-const Job = require('../models/Job');
+
 
 // Route to create a new user
-router.post('/create', async (req, res) => {
-  const { name, email, password, role } = req.body;
-  try {
-    const newUser = await Job.create({ name, email, password, role });
-    res.status(201).json(newUser);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
+router.post('/add', addJob);
+router.get("/", getAllJobs);
+router.get("/:id", getJobById);
 
-module.exports = router;
+export default router;
