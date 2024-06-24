@@ -1,9 +1,9 @@
 import CustomValidationError from "../Exceptions/CustomException.js";
-import { addJobProfile, findAllJobs, findJobById } from "../repository/job.repository.js";
+import { addIndustries, findAllIndustry, findIndustryById } from "../repository/industry.repository.js";
 
-export const addJob = async (req, res, next) => {
+export const addIndustry = async (req, res, next) => {
     try {
-        const newUser = await addJobProfile(req);
+        const newUser = await addIndustries(req);
         res.status(201).json(newUser);
     } catch (error) {
         if (error.name === 'SequelizeValidationError') {
@@ -14,9 +14,9 @@ export const addJob = async (req, res, next) => {
     }
 }
 
-export const getAllJobs = async (req, res) => {
+export const getAllIndustry = async (req, res) => {
     try {
-        const allUsers = await findAllJobs();
+        const allUsers = await findAllIndustry();
         res.status(200).json(allUsers);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -24,16 +24,15 @@ export const getAllJobs = async (req, res) => {
 }
 
 
-export const getJobById= async(req, res)=>{
-    const empid = req.params.id;
+export const getIndustryById= async(req, res)=>{
+    const industryId = req.params.id;
     try {
-        const employer = await findJobById(empid);
+        const employer = await findIndustryById(industryId);
         if (!employer) {
-            throw new CustomValidationError([{ message: 'Employer profile not found' }]);
+            throw new CustomValidationError([{ message: 'Indsutry not found' }]);
         }
         res.status(200).json(employer);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 }
-

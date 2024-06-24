@@ -6,7 +6,18 @@ import { errorHandler } from './Exceptions/VaidationMiddleware.js';
 import userController from "./controllers/user.controller.js";
 import employerController from "./controllers/employer.controller.js"
 import JobContoller from "./controllers/job.controller.js";
-// import jobSeekerRoutes from "./controllers/JobSeekerRoutes.js";
+import IndustryController from "./controllers/industry.controller.js";
+import Industry from './models/Industry.js';
+import JobIndustry from './models/JobIndustry.js';
+import { initializeAssociations } from './services/associationService.js';
+initializeAssociations()
+  .then(() => {
+    console.log('Database synchronized and associations initialized successfully.');
+    // Start your application logic here
+  })
+  .catch((error) => {
+    console.error('Error synchronizing database:', error);
+  });
 
 const app = express();
 const port = 3000;
@@ -18,13 +29,13 @@ app.use(bodyParser.json());
 app.use("/users", userController);
 app.use("/employer",employerController);
 app.use("/job",JobContoller);
+app.use("/industry", IndustryController)
 
 app.use(errorHandler);
-// app.use("/jobs", jobRoutes);
-// app.use("/employers", employerRoutes);
-// app.use("/candidates", jobSeekerRoutes);
 
-sequelize.sync().then(() => {
+
+
+sequelize.sync({force : true}).then(() => {  
     app.listen(port, () => {
         console.log(`Server is running on port ${port}`);
     })

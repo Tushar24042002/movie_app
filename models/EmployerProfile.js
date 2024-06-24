@@ -67,4 +67,5 @@ EmployerProfile.init({
   modelName: 'EmployerProfile',
 });
 
+// EmployerProfile.belongsTo(User, { foreignKey: 'userId' });
 export default EmployerProfile;
