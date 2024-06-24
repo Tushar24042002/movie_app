@@ -1,9 +1,9 @@
 import CustomValidationError from "../Exceptions/CustomException.js";
-import { addEmployerProfile, findAllEmployers, findEmployerById } from "../repository/employer.repository.js";
+import { addWishlist, findAllWishlist, findWishlistById } from "../repository/watchlist.repository.js";
 
-export const addEmpProfile = async (req, res, next) => {
+export const addNewWishlist = async (req, res, next) => {
     try {
-        const newUser = await addEmployerProfile(req);
+        const newUser = await addWishlist(req);
         res.status(201).json(newUser);
     } catch (error) {
         if (error.name === 'SequelizeValidationError') {
@@ -14,9 +14,9 @@ export const addEmpProfile = async (req, res, next) => {
     }
 }
 
-export const getAllEmployers = async (req, res) => {
+export const getAllWishlist = async (req, res) => {
     try {
-        const allUsers = await findAllEmployers();
+        const allUsers = await findAllWishlist();
         res.status(200).json(allUsers);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -24,12 +24,12 @@ export const getAllEmployers = async (req, res) => {
 }
 
 
-export const getEmployerById= async(req, res)=>{
-    const empid = req.params.id;
+export const getWishlistById= async(req, res)=>{
+    const industryId = req.params.id;
     try {
-        const employer = await findEmployerById(empid);
+        const employer = await findWishlistById(industryId);
         if (!employer) {
-            throw new CustomValidationError([{ message: 'Employer profile not found' }]);
+            throw new CustomValidationError([{ message: 'Indsutry not found' }]);
         }
         res.status(200).json(employer);
     } catch (error) {

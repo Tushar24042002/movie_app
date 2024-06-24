@@ -1,32 +1,15 @@
 import { DataTypes, Model } from 'sequelize';
 import sequelize from '../config.js';
-import User from './User.js';
 
-class EmployerProfile extends Model {}
+class Movie extends Model {}
 
-EmployerProfile.init({
+Movie.init({
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
   },
-  userId: {
-    type: DataTypes.INTEGER,
-    references: {
-      model: User,
-      key: 'id',
-    },
-    allowNull: false,
-    validate: {
-      notNull: {
-        msg: "user is required"
-      },
-      notEmpty: {
-        msg: "user is required"
-      }
-    }
-  },
-  companyName: {
+  title: {
     type: DataTypes.STRING,
     allowNull: false,
     validate: {
@@ -38,7 +21,7 @@ EmployerProfile.init({
       }
     }
   },
-  companyDescription: {
+  description: {
     type: DataTypes.TEXT,
     allowNull: false,
     validate: {
@@ -50,8 +33,8 @@ EmployerProfile.init({
       }
     }
   },
-  companyWebsite: {
-    type: DataTypes.STRING,
+  release_year: {
+    type: DataTypes.INTEGER,
     allowNull: false,
     validate: {
       notNull: {
@@ -62,10 +45,20 @@ EmployerProfile.init({
       }
     }
   },
+  genre: {
+    type: DataTypes.ENUM('admin', 'employer', 'job_seeker'),
+    allowNull : false,
+    validate: {
+      notNull: {
+        msg: "Company name is required"
+      },
+      notEmpty: {
+        msg: "Company name is required"
+      }
+    }
+  },
 }, {
   sequelize,
-  modelName: 'EmployerProfile',
+  modelName: 'Movie',
 });
-
-// EmployerProfile.belongsTo(User, { foreignKey: 'userId' });
-export default EmployerProfile;
+export default Movie;
