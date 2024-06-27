@@ -1,10 +1,10 @@
 import ReviewRating from '../models/ReviewRating.js';
-import { getCurrentUser } from '../services/user.service.js'; // Adjust the path as needed
+import { findReviewById } from '../repository/movie.repository.js';
+import { getCurrentUser } from '../services/user.service.js'; 
 
-// Add or Update Review and Rating
 export const addReviewRating = async (req, res) => {
   try {
-    const user = await getCurrentUser(req); // Get the current user from the request
+    const user = await getCurrentUser(req);
     const { movieId, rating, review } = req.body;
 
     // Find existing review rating
@@ -31,6 +31,20 @@ export const addReviewRating = async (req, res) => {
       return res.status(201).json(newReviewRating);
     }
   } catch (error) {
-    return res.status(500).json({ error: error.message });
+    return res.status(500).json({ error: error.message , data :"" });
   }
 };
+
+
+export const getReviewById= async(req, res)=>{
+  const movieId = req.params.id;
+  try {
+      const employer = await findReviewById(movieId);
+      if (!employer) {
+          throw new CustomValidationError([{ message: 'Movie  not found sorry' }]);
+      }
+      res.status(200).json(employer);
+  } catch (error) {
+      res.status(500).json({ error: error.message });
+  }
+}

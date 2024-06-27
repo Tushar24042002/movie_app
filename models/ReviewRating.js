@@ -48,5 +48,6 @@ ReviewRating.init({
     },
   },
 });
-
+Movie.hasOne(ReviewRating, { foreignKey: 'movieId' });
+ReviewRating.belongsTo(Movie, { foreignKey: 'movieId' });
 export default ReviewRating;

@@ -1,5 +1,6 @@
 import sequelize from "../config.js";
 import Movie from "../models/Movie.js"
+import ReviewRating from "../models/ReviewRating.js";
 import UserMovie from "../models/UserMovies.js";
 import WatchlistItem from "../models/WatchlistItem.js";
 import { getCurrentUser } from "../services/user.service.js";
@@ -83,7 +84,6 @@ export const findAllMovies= async()=>{
 }
 
 export const fetchMovies = async (userId, condition) => {
-  console.log(userId)
   return await Movie.findAll({
     include: [{
       model: WatchlistItem,
@@ -92,7 +92,16 @@ export const fetchMovies = async (userId, condition) => {
         watched: condition,
       },
       attributes: ['watched'], 
-    }],
+    },
+    {
+      model: ReviewRating,
+      where: {
+        userId: userId,
+        movieId: Movie.col('id') 
+      },
+      attributes: ['rating', 'review'], // Assuming you want to fetch rating and review
+    },
+  ],
     attributes: ['id', 'title', 'genre','description', 'release_year'] 
   });
 };
@@ -100,6 +109,14 @@ export const fetchMovies = async (userId, condition) => {
 
 export const findMovieById = async(id)=>{
         return await Movie.findByPk(id);
+}
+
+export const findReviewById = async(id)=>{
+  return await ReviewRating.findOne({
+    where :{
+      movieId : id
+    }
+  });
 }
 
 
