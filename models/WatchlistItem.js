@@ -37,4 +37,7 @@ WatchlistItem.init({
   modelName: 'WatchlistItem',
 });
 
+Movie.hasOne(WatchlistItem, { foreignKey: 'movieId' });
+WatchlistItem.belongsTo(Movie, { foreignKey: 'movieId' });
+
 export default WatchlistItem;

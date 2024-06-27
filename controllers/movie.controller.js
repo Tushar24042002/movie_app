@@ -1,12 +1,16 @@
 import express from "express";
-import { addNewMovie, editOrUpdateMovie, getAllMovies, getMovieById } from "../services/movie.service.js";
+import { addMovieToWatched, addNewMovie, deleteMovies, editOrUpdateMovie, getAllMovies, getMovieById, getWatchListMovies, getWatchedMovies } from "../services/movie.service.js";
 const router = express.Router();
 
 
 // Route to create a new user
 router.post('/add', addNewMovie);
 router.post('/update/:id', editOrUpdateMovie);
-router.get("/", getAllMovies);
-router.get("/:id", getMovieById);
+router.get("/", getWatchListMovies);
+router.get("/movie/:id", getMovieById);
+router.post("/watch/:id", addMovieToWatched);
+router.get("/watched", getWatchedMovies);
+router.post("/delete/:id", deleteMovies);
+
 
 export default router;

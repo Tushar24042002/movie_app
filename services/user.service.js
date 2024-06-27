@@ -70,7 +70,7 @@ export const login = async (req, res) => {
             };
             const accessToken = jwt.sign(tokenPayload, process.env.JWT_SECRET_KEY);
             res.status(201).json({
-                status: 'success',
+                status: true,
                 message: 'User Logged In!',
                 data: {
                   accessToken,

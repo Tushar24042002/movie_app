@@ -22,14 +22,6 @@ User.init({
         type: DataTypes.STRING,
         allowNull: false,
     },
-    role: {
-        type: DataTypes.ENUM('admin', 'employer', 'job_seeker'),
-        allowNull: false,
-    },
-    isverified : {
-        type : DataTypes.BOOLEAN,
-        defaultValue : false
-    }
 }, {
     sequelize,
     modelName: 'User',

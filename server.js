@@ -7,9 +7,11 @@ import movieController from "./controllers/movie.controller.js";
 import watchlistController from "./controllers/watchlist.controller.js";
 import reviewController from "./controllers/reviewRating.controller.js";
 import dotenv from 'dotenv';
+import cors from "cors";
 const app = express();
-const port = 3000;
+app.use(cors());
 dotenv.config();
+const port = process.env.PORT ||  5000;
 app.use(bodyParser.json());
 
 
@@ -22,7 +24,13 @@ app.use("/review", reviewController);
 app.use(errorHandler);
 
 
-
+// sequelize.authenticate()
+//   .then(() => {
+//     console.log('Connection has been established successfully.');
+//   })
+//   .catch(err => {
+//     console.error('Unable to connect to the database:', err);
+//   });
 sequelize.sync().then(() => {  
     app.listen(port, () => {
         console.log(`Server is running on port ${port}`);

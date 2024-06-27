@@ -14,10 +14,10 @@ Movie.init({
     allowNull: false,
     validate: {
       notNull: {
-        msg: "Company name is required"
+        msg: " name is required"
       },
       notEmpty: {
-        msg: "Company name is required"
+        msg: " name is required"
       }
     }
   },
@@ -26,10 +26,10 @@ Movie.init({
     allowNull: false,
     validate: {
       notNull: {
-        msg: "Company description is required"
+        msg: " description is required"
       },
       notEmpty: {
-        msg: "Company description is required"
+        msg: " description is required"
       }
     }
   },
@@ -38,15 +38,15 @@ Movie.init({
     allowNull: false,
     validate: {
       notNull: {
-        msg: "Company website is required"
+        msg: "Release year is required"
       },
       notEmpty: {
-        msg: "Company website is required"
+        msg: "Release year is required"
       }
     }
   },
   genre: {
-    type: DataTypes.ENUM('admin', 'employer', 'job_seeker'),
+    type: DataTypes.ENUM('Action', 'Comedy', 'Drama', 'Horror', 'Sci-Fi'),
     allowNull : false,
     validate: {
       notNull: {

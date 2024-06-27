@@ -12,11 +12,7 @@ router.get("/", getAllUsers);
 // router.get('/', abc);
 
 router.post("/generate-token", generateToken)
-
-
 router.get("/validate-token", validateToken)
-
-
 router.post("/login", login);
 function abc(request, response) {
     var filePath = path.resolve("1719058470287_output.pdf");
