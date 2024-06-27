@@ -63,7 +63,6 @@ export const getWatchedMovies = async (req, res) => {
       }
   
       const watchedMovies = await fetchMovies(user.id, true);
-      console.log(watchedMovies)
       return res.json(watchedMovies);
     } catch (error) {
       console.error('Error fetching watched movies:', error);
@@ -80,7 +79,7 @@ export const getWatchedMovies = async (req, res) => {
       }
   
       const watchedMovies = await fetchMovies(user.id, false);
-      console.log(watchedMovies)
+      console.log(watchedMovies , "dajfn n")
       return res.json(watchedMovies);
     } catch (error) {
       console.error('Error fetching watched movies:', error);

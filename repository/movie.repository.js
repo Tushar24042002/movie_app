@@ -1,3 +1,4 @@
+import { Sequelize } from "sequelize";
 import sequelize from "../config.js";
 import Movie from "../models/Movie.js"
 import ReviewRating from "../models/ReviewRating.js";
@@ -13,7 +14,6 @@ export const addMovie = async (req, res) => {
   try {
     const movieData = await Movie.create(req.body, { transaction });
     const user = await getCurrentUser(req, res);
-    console.log(user);
     if (!user) {
       throw new Error('User not found');
     }
@@ -84,6 +84,7 @@ export const findAllMovies= async()=>{
 }
 
 export const fetchMovies = async (userId, condition) => {
+  console.log(userId)
   return await Movie.findAll({
     include: [{
       model: WatchlistItem,
@@ -97,9 +98,10 @@ export const fetchMovies = async (userId, condition) => {
       model: ReviewRating,
       where: {
         userId: userId,
-        movieId: Movie.col('id') 
+        movieId: Sequelize.col('Movie.id'),
       },
-      attributes: ['rating', 'review'], // Assuming you want to fetch rating and review
+      attributes: ['rating', 'review'], 
+      required: false,
     },
   ],
     attributes: ['id', 'title', 'genre','description', 'release_year'] 

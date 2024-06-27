@@ -92,7 +92,6 @@ export const login = async (req, res) => {
 
 
 export const getCurrentUser = async (req, res) => {
-    console.log(req)
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
 

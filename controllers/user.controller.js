@@ -16,16 +16,12 @@ router.get("/validate-token", validateToken)
 router.post("/login", login);
 function abc(request, response) {
     var filePath = path.resolve("1719058470287_output.pdf");
-    console.log("working")
     response.download(filePath, function(err) {
         if (err) {
-            console.log(err); // Check error if you want
         } else {
             fs.unlink(filePath, function(err) {
                 if (err) {
-                    console.log(err); // Check error if you want
                 } else {
-                    console.log("File was deleted"); // Callback
                 }
             });
         }
